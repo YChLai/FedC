@@ -21,6 +21,30 @@ class GCELoss(nn.Module):
         loss = (1. - torch.pow(torch.sum(label_one_hot * pred, dim=1), self.q)) / self.q
         return loss.mean()
 
+class MixupMSELoss(nn.Module):
+    """
+    Mean Square Error Loss for Mixup (Equation 4-8)
+    Constraints the consistency between the prediction and the mixed label distribution.
+    """
+    def __init__(self):
+        super(MixupMSELoss, self).__init__()
+        self.mse = nn.MSELoss()
+
+    def forward(self, pred, y_a, y_b, lam):
+        # pred: logits -> softmax -> probability distribution
+        pred_probs = F.softmax(pred, dim=1)
+        
+        # Create mixed target distribution
+        # y_a, y_b are indices, need to convert to one-hot
+        num_classes = pred.size(1)
+        y_a_one_hot = F.one_hot(y_a, num_classes).float()
+        y_b_one_hot = F.one_hot(y_b, num_classes).float()
+        
+        target_probs = lam * y_a_one_hot + (1 - lam) * y_b_one_hot
+        
+        # Calculate MSE
+        return self.mse(pred_probs, target_probs)
+
 def mixup_data(x, y, alpha=1.0, use_cuda=True):
     '''Returns mixed inputs, pairs of targets, and lambda'''
     if alpha > 0:

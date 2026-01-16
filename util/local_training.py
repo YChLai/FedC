@@ -3,7 +3,8 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
 import copy
-from .loss import GCELoss, mixup_data, mixup_criterion
+import numpy as np
+from .loss import GCELoss, MixupMSELoss, mixup_data, mixup_criterion
 
 class DatasetSplit(Dataset):
     def __init__(self, dataset, idxs, sample_types=None, pseudo_labels=None):
@@ -37,6 +38,7 @@ class LocalUpdate(object):
         self.args = args
         self.loss_ce = nn.CrossEntropyLoss()
         self.loss_gce = GCELoss(q=0.7) # GCE q parameter
+        self.loss_mse = MixupMSELoss() # New MSE Loss for Noisy samples
         
         self.sample_types = sample_types
         self.pseudo_labels = pseudo_labels
@@ -53,8 +55,7 @@ class LocalUpdate(object):
 
         epoch_loss = []
         
-        # 损失函数权重 (参考文档公式 4-10 前后的定义: lambda_c + lambda_n + lambda_h = 1)
-        # 这里设置为默认值，您可以根据实验调整
+        # 损失函数权重 (lambda_c + lambda_n + lambda_h = 1)
         lam_c, lam_n, lam_h = 0.4, 0.3, 0.3 
 
         for iter in range(epoch):
@@ -75,17 +76,38 @@ class LocalUpdate(object):
                     pred_c = net(images[clean_mask])
                     loss += lam_c * self.loss_ce(pred_c, labels[clean_mask].long())
 
-                # --- 2. Noisy Samples: Mixup ---
+                # --- 2. Noisy Samples: Mixup with MSE ---
+                # 文档要求：优先“同类重标记样本” 或“重标记样本 - 干净样本”混合
+                # 并且使用均方误差 (MSE) 约束
                 if noisy_mask.sum() > 0:
                     inputs_n = images[noisy_mask]
                     labels_n = labels[noisy_mask].long()
-                    if len(inputs_n) > 1:
-                        inputs_mix, targets_a, targets_b, lam = mixup_data(inputs_n, labels_n, self.args.alpha, use_cuda=True)
-                        pred_mix = net(inputs_mix)
-                        loss += lam_n * mixup_criterion(self.loss_ce, pred_mix, targets_a, targets_b, lam)
+                    
+                    # 尝试寻找 Clean 样本进行混合
+                    inputs_clean = images[clean_mask]
+                    labels_clean = labels[clean_mask].long()
+                    
+                    if len(inputs_clean) > 0:
+                        # 如果当前 batch 有 Clean 样本，优先从 Clean 中随机采样作为 Mixup 对象
+                        # 生成随机索引
+                        rand_idx = torch.randint(0, len(inputs_clean), (len(inputs_n),)).to(self.args.device)
+                        inputs_partner = inputs_clean[rand_idx]
+                        labels_partner = labels_clean[rand_idx]
                     else:
-                        pred_n = net(inputs_n)
-                        loss += lam_n * self.loss_ce(pred_n, labels_n)
+                        # 如果当前 batch 没有 Clean 样本，则在 Noisy 样本内部 shuffle
+                        idx = torch.randperm(len(inputs_n)).to(self.args.device)
+                        inputs_partner = inputs_n[idx]
+                        labels_partner = labels_n[idx]
+
+                    # 执行 Mixup
+                    alpha = self.args.alpha
+                    lam = np.random.beta(alpha, alpha) if alpha > 0 else 1.0
+                    
+                    inputs_mix = lam * inputs_n + (1 - lam) * inputs_partner
+                    pred_mix = net(inputs_mix)
+                    
+                    # 使用 MSE 计算损失 (公式 4-8)
+                    loss += lam_n * self.loss_mse(pred_mix, labels_n, labels_partner, lam)
 
                 # --- 3. Complex Samples: GCE Loss ---
                 if complex_mask.sum() > 0:
@@ -105,9 +127,10 @@ class LocalUpdate(object):
                 optimizer.step()
                 batch_loss.append(loss.item())
 
-            epoch_loss.append(sum(batch_loss)/len(batch_loss))
+            if len(batch_loss) > 0:
+                epoch_loss.append(sum(batch_loss)/len(batch_loss))
             
-        return net.state_dict(), sum(epoch_loss) / len(epoch_loss)
+        return net.state_dict(), sum(epoch_loss) / len(epoch_loss) if len(epoch_loss) > 0 else 0.0
 
 def globaltest(net, test_dataset, args):
     net.eval()
