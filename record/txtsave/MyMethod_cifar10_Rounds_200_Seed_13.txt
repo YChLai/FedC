@@ -53,3 +53,36 @@ Round 4, Client 80: Sn=0.846, Ci=1.000, Phi=1.000, Rep=1.109
 Round 4, Client 55: Sn=0.859, Ci=0.500, Phi=1.000, Rep=1.073
 Round 4, Client 20: Sn=0.860, Ci=1.000, Phi=1.000, Rep=1.097
 Round 4 Global Accuracy: 0.1168
+Round 5, Client 39: Sn=0.826, Ci=0.800, Phi=1.000, Rep=1.091
+Round 5, Client 74: Sn=0.755, Ci=0.600, Phi=1.000, Rep=1.181
+Round 5, Client 94: Sn=0.851, Ci=1.000, Phi=1.000, Rep=1.097
+Round 5, Client 12: Sn=0.601, Ci=0.600, Phi=1.000, Rep=1.094
+Round 5, Client 33: Sn=0.823, Ci=0.800, Phi=1.000, Rep=1.091
+Round 5, Client 51: Sn=0.894, Ci=1.000, Phi=1.000, Rep=1.095
+Round 5, Client 76: Sn=0.883, Ci=1.000, Phi=1.000, Rep=1.096
+Round 5, Client 35: Sn=0.912, Ci=1.000, Phi=1.000, Rep=1.094
+Round 5, Client 49: Sn=0.476, Ci=0.700, Phi=1.000, Rep=1.104
+Round 5, Client 87: Sn=0.864, Ci=0.800, Phi=1.000, Rep=1.089
+Round 5 Global Accuracy: 0.1547
+Round 6, Client 78: Sn=0.881, Ci=0.500, Phi=1.000, Rep=1.056
+Round 6, Client 15: Sn=0.845, Ci=1.000, Phi=1.000, Rep=1.098
+Round 6, Client 38: Sn=0.881, Ci=1.000, Phi=1.000, Rep=1.212
+Round 6, Client 24: Sn=0.870, Ci=0.600, Phi=1.000, Rep=1.265
+Round 6, Client 68: Sn=0.871, Ci=1.000, Phi=1.000, Rep=1.096
+Round 6, Client 11: Sn=0.856, Ci=0.800, Phi=1.000, Rep=1.179
+Round 6, Client 14: Sn=0.910, Ci=0.900, Phi=1.000, Rep=1.185
+Round 6, Client 19: Sn=0.686, Ci=0.700, Phi=1.000, Rep=1.094
+Round 6, Client 10: Sn=0.765, Ci=0.800, Phi=1.000, Rep=1.208
+Round 6, Client 45: Sn=0.820, Ci=0.900, Phi=1.000, Rep=1.095
+Round 6 Global Accuracy: 0.1474
+Round 7, Client 12: Sn=0.720, Ci=0.600, Phi=1.000, Rep=1.182
+Round 7, Client 2: Sn=0.666, Ci=1.000, Phi=1.000, Rep=1.107
+Round 7, Client 89: Sn=0.549, Ci=0.800, Phi=1.000, Rep=1.202
+Round 7, Client 29: Sn=0.655, Ci=1.000, Phi=1.000, Rep=1.107
+Round 7, Client 36: Sn=0.678, Ci=0.900, Phi=1.000, Rep=1.102
+Round 7, Client 5: Sn=0.828, Ci=0.900, Phi=1.000, Rep=1.209
+Round 7, Client 30: Sn=0.681, Ci=1.000, Phi=1.000, Rep=1.106
+Round 7, Client 28: Sn=0.715, Ci=1.000, Phi=1.000, Rep=1.104
+Round 7, Client 61: Sn=0.684, Ci=0.800, Phi=1.000, Rep=1.186
+Round 7, Client 90: Sn=0.735, Ci=1.000, Phi=1.000, Rep=1.103
+Round 7 Global Accuracy: 0.1003
