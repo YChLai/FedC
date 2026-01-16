@@ -1,0 +1,10 @@
+iteration 0, client 29, acc: 0.2045 
+iteration 0, client 90, acc: 0.2024 
+iteration 0, client 39, acc: 0.2985 
+iteration 0, client 78, acc: 0.3118 
+iteration 0, client 49, acc: 0.2814 
+iteration 0, client 13, acc: 0.2421 
+iteration 0, client 19, acc: 0.2599 
+iteration 0, client 98, acc: 0.1954 
+iteration 0, client 96, acc: 0.3691 
+iteration 0, client 3, acc: 0.2814 
