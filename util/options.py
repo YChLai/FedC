@@ -8,17 +8,17 @@ def args_parser():
     parser = argparse.ArgumentParser()
     # federated arguments
     parser.add_argument('--iteration1', type=int, default=5, help="enumerate iteration in preprocessing stage")
-    parser.add_argument('--rounds1', type=int, default=200, help="rounds of training in fine_tuning stage")
-    parser.add_argument('--rounds2', type=int, default=200, help="rounds of training in usual training stage")
+    parser.add_argument('--total_rounds', type=int, default=1000, help="rounds of training in fine_tuning stage")
+    parser.add_argument('--warmup_rounds', type=int, default=200, help="rounds of training in usual training stage")
     parser.add_argument('--local_ep', type=int, default=5, help="number of local epochs")
     parser.add_argument('--frac1', type=float, default=0.1, help="fration of selected clients in preprocessing stage")
     parser.add_argument('--frac2', type=float, default=0.1, help="fration of selected clients in fine-tuning and usual training stage")
 
     parser.add_argument('--num_users', type=int, default=100, help="number of uses: K")
-    parser.add_argument('--local_bs', type=int, default=10, help="local batch size: B")
-    parser.add_argument('--lr', type=float, default=0.06, help="learning rate")
-    parser.add_argument('--momentum', type=float, default=0.5, help="SGD momentum, default 0.5")
-    parser.add_argument('--beta', type=float, default=0, help="coefficient for local proximal，0 for fedavg, 1 for fedprox, 5 for noise fl")
+    parser.add_argument('--local_bs', type=int, default=64, help="local batch size: B")
+    parser.add_argument('--lr', type=float, default=0.04, help="learning rate")
+    parser.add_argument('--momentum', type=float, default=0.9, help="SGD momentum, default 0.9")
+    parser.add_argument('--beta', type=float, default=0.1, help="coefficient for local proximal，0 for fedavg, 1 for fedprox, 5 for noise fl")
 
     # noise arguments
     parser.add_argument('--LID_k', type=int, default=20, help="lid")
@@ -45,17 +45,17 @@ def args_parser():
     parser.add_argument('--num_classes', type=int, default=10, help="number of classes")
     parser.add_argument('--seed', type=int, default=13, help="random seed, default: 1")
     parser.add_argument('--mixup', action='store_true', help="whether to use mixup")
-    parser.add_argument('--alpha', type=float, default=1.0, help="mixup alpha")
+    parser.add_argument('--alpha', type=float, default=2.0, help="mixup alpha")
 
     parser.add_argument('--gpu', type=int, default=0, help="GPU ID, -1 for CPU")
 
     # [NEW] Incentive & Loss Hyperparameters
     parser.add_argument('--alpha1', type=float, default=0.1, help="Incentive weight 1")
-    parser.add_argument('--alpha2', type=float, default=0.5, help="Incentive weight 2")
+    parser.add_argument('--alpha2', type=float, default=1.5, help="Incentive weight 2")
     parser.add_argument('--alpha3', type=float, default=0.4, help="Incentive weight 3")
     parser.add_argument('--lambda_c', type=float, default=0.4, help="Clean loss weight")
-    parser.add_argument('--lambda_n', type=float, default=0.3, help="Noisy loss weight")
+    parser.add_argument('--lambda_n', type=float, default=0.5, help="Noisy loss weight")
     parser.add_argument('--lambda_h', type=float, default=0.3, help="Hard/Complex loss weight")
-    parser.add_argument('--zeta', type=float, default=0.75, help="Confidence threshold for relabeling")
+    parser.add_argument('--zeta', type=float, default=0.85, help="Confidence threshold for relabeling")
 
     return parser.parse_args()

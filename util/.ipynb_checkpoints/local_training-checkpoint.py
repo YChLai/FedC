@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader, Dataset
 import copy
 import numpy as np
 from .loss import GCELoss, MixupMSELoss, mixup_data, mixup_criterion
+from util.options import args_parser
 
 class DatasetSplit(Dataset):
     def __init__(self, dataset, idxs, sample_types=None, pseudo_labels=None):
@@ -47,6 +48,7 @@ class LocalUpdate(object):
                                     batch_size=self.args.local_bs, shuffle=True)
 
     def update_weights(self, net, seed, w_g, epoch, mu=1, lr=None):
+        args = args_parser()
         net.train()
         if lr is None:
             optimizer = torch.optim.SGD(net.parameters(), lr=self.args.lr, momentum=self.args.momentum)
@@ -55,8 +57,7 @@ class LocalUpdate(object):
 
         epoch_loss = []
         
-        # 损失函数权重 (lambda_c + lambda_n + lambda_h = 1)
-        lam_c, lam_n, lam_h = 0.4, 0.3, 0.3 
+        lam_c, lam_n, lam_h = args.lambda_c,args.lambda_n,args.lambda_h
 
         for iter in range(epoch):
             batch_loss = []
@@ -66,38 +67,59 @@ class LocalUpdate(object):
                 
                 loss = 0
                 
-                # Masks
                 clean_mask = (s_types == 0)
                 noisy_mask = (s_types == 1)
                 complex_mask = (s_types == 2)
                 
-                # --- 1. Clean Samples: Cross Entropy ---
+                # --- 1. Clean Samples ---
                 if clean_mask.sum() > 0:
                     pred_c = net(images[clean_mask])
                     loss += lam_c * self.loss_ce(pred_c, labels[clean_mask].long())
 
                 # --- 2. Noisy Samples: Mixup with MSE ---
-                # 文档要求：优先“同类重标记样本” 或“重标记样本 - 干净样本”混合
-                # 并且使用均方误差 (MSE) 约束
                 if noisy_mask.sum() > 0:
                     inputs_n = images[noisy_mask]
                     labels_n = labels[noisy_mask].long()
                     
-                    # 尝试寻找 Clean 样本进行混合
+                    # 尝试寻找 Clean 样本
                     inputs_clean = images[clean_mask]
                     labels_clean = labels[clean_mask].long()
                     
                     if len(inputs_clean) > 0:
-                        # 如果当前 batch 有 Clean 样本，优先从 Clean 中随机采样作为 Mixup 对象
-                        # 生成随机索引
+                        # 优先 1: 与 Clean 样本混合
                         rand_idx = torch.randint(0, len(inputs_clean), (len(inputs_n),)).to(self.args.device)
                         inputs_partner = inputs_clean[rand_idx]
                         labels_partner = labels_clean[rand_idx]
                     else:
-                        # 如果当前 batch 没有 Clean 样本，则在 Noisy 样本内部 shuffle
-                        idx = torch.randperm(len(inputs_n)).to(self.args.device)
-                        inputs_partner = inputs_n[idx]
-                        labels_partner = labels_n[idx]
+                        # 优先 2: 在 Noisy 内部寻找 "同类" 伙伴
+                        batch_n = len(inputs_n)
+                        partner_idxs = torch.arange(batch_n).to(self.args.device)
+                        
+                        # 如果没有 Clean，我们在 Noisy 内部找
+                        for i in range(batch_n):
+                            target_class = labels_n[i].item()
+                            same_class_indices = (labels_n == target_class).nonzero(as_tuple=True)[0]
+                            
+                            # 排除自己
+                            candidates = same_class_indices[same_class_indices != i]
+                            
+                            if len(candidates) > 0:
+                                # 找到同类伙伴，随机选一个
+                                selected = candidates[torch.randint(len(candidates), (1,))]
+                                partner_idxs[i] = selected
+                            else:
+                                # [关键修改] 如果找不到同类伙伴，不要与自己混合！
+                                # 退化为随机选择任意一个 Noisy 样本作为伙伴 (Standard Mixup)
+                                # 这保证了即便只有单样本，也有数据增强效果
+                                other_indices = torch.arange(batch_n).to(self.args.device)
+                                other_indices = other_indices[other_indices != i] # 排除自己
+                                if len(other_indices) > 0:
+                                    selected = other_indices[torch.randint(len(other_indices), (1,))]
+                                    partner_idxs[i] = selected
+                                # 如果整个 batch 只有这 1 个 Noisy 样本，那只能与自己混合（极少见）
+
+                        inputs_partner = inputs_n[partner_idxs]
+                        labels_partner = labels_n[partner_idxs]
 
                     # 执行 Mixup
                     alpha = self.args.alpha
@@ -106,15 +128,14 @@ class LocalUpdate(object):
                     inputs_mix = lam * inputs_n + (1 - lam) * inputs_partner
                     pred_mix = net(inputs_mix)
                     
-                    # 使用 MSE 计算损失 (公式 4-8)
                     loss += lam_n * self.loss_mse(pred_mix, labels_n, labels_partner, lam)
 
-                # --- 3. Complex Samples: GCE Loss ---
+                # --- 3. Complex Samples ---
                 if complex_mask.sum() > 0:
                     pred_h = net(images[complex_mask])
                     loss += lam_h * self.loss_gce(pred_h, labels[complex_mask].long())
 
-                # FedProx (Proximal term)
+                # FedProx
                 if self.args.beta > 0:
                     if batch_idx > 0:
                         w_diff = torch.tensor(0.).to(self.args.device)
