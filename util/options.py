@@ -47,8 +47,8 @@ def args_parser():
     parser = argparse.ArgumentParser()
     # federated arguments
     parser.add_argument('--iteration1', type=int, default=5, help="enumerate iteration in preprocessing stage")
-    parser.add_argument('--total_rounds', type=int, default=1000, help="rounds of training in fine_tuning stage")
-    parser.add_argument('--warmup_rounds', type=int, default=200, help="rounds of training in usual training stage")
+    parser.add_argument('--total_rounds', type=int, default=1000, help="rounds of training in total stage")
+    parser.add_argument('--warmup_rounds', type=int, default=200, help="rounds of training in warmup stage")
     parser.add_argument('--local_ep', type=int, default=5, help="number of local epochs")
     parser.add_argument('--frac1', type=float, default=0.1, help="fration of selected clients in preprocessing stage")
     parser.add_argument('--frac2', type=float, default=0.1, help="fration of selected clients in fine-tuning and usual training stage")

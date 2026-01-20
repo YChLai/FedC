@@ -1,0 +1,221 @@
+iteration 0, client 29, acc: 0.2045 
+iteration 0, client 90, acc: 0.2024 
+iteration 0, client 39, acc: 0.2985 
+iteration 0, client 78, acc: 0.3118 
+iteration 0, client 49, acc: 0.2814 
+iteration 0, client 13, acc: 0.2421 
+iteration 0, client 19, acc: 0.2599 
+iteration 0, client 98, acc: 0.1954 
+iteration 0, client 96, acc: 0.3691 
+iteration 0, client 3, acc: 0.2814 
+iteration 0, client 69, acc: 0.2355 
+iteration 0, client 50, acc: 0.2716 
+iteration 0, client 44, acc: 0.3372 
+iteration 0, client 17, acc: 0.1725 
+iteration 0, client 5, acc: 0.2548 
+iteration 0, client 43, acc: 0.3803 
+iteration 0, client 99, acc: 0.3756 
+iteration 0, client 16, acc: 0.2466 
+iteration 0, client 66, acc: 0.4122 
+iteration 0, client 67, acc: 0.3180 
+iteration 0, client 47, acc: 0.3077 
+iteration 0, client 7, acc: 0.2130 
+iteration 0, client 53, acc: 0.2661 
+iteration 0, client 89, acc: 0.4203 
+iteration 0, client 21, acc: 0.4273 
+iteration 0, client 8, acc: 0.2964 
+iteration 0, client 1, acc: 0.4167 
+iteration 0, client 9, acc: 0.1718 
+iteration 0, client 64, acc: 0.3587 
+iteration 0, client 45, acc: 0.4021 
+iteration 0, client 55, acc: 0.2793 
+iteration 0, client 25, acc: 0.4463 
+iteration 0, client 22, acc: 0.3983 
+iteration 0, client 36, acc: 0.4421 
+iteration 0, client 23, acc: 0.4469 
+iteration 0, client 28, acc: 0.4306 
+iteration 0, client 88, acc: 0.4676 
+iteration 0, client 71, acc: 0.2131 
+iteration 0, client 48, acc: 0.3353 
+iteration 0, client 60, acc: 0.3246 
+iteration 0, client 75, acc: 0.3792 
+iteration 0, client 12, acc: 0.2912 
+iteration 0, client 94, acc: 0.2704 
+iteration 0, client 4, acc: 0.2846 
+iteration 0, client 30, acc: 0.2442 
+iteration 0, client 86, acc: 0.3847 
+iteration 0, client 31, acc: 0.2789 
+iteration 0, client 85, acc: 0.4324 
+iteration 0, client 62, acc: 0.4682 
+iteration 0, client 59, acc: 0.4843 
+iteration 0, client 37, acc: 0.5141 
+iteration 0, client 40, acc: 0.5085 
+iteration 0, client 84, acc: 0.4218 
+iteration 0, client 61, acc: 0.4138 
+iteration 0, client 80, acc: 0.4942 
+iteration 0, client 41, acc: 0.5100 
+iteration 0, client 32, acc: 0.5350 
+iteration 0, client 15, acc: 0.5311 
+iteration 0, client 56, acc: 0.5001 
+iteration 0, client 18, acc: 0.3797 
+iteration 0, client 83, acc: 0.5267 
+iteration 0, client 6, acc: 0.5012 
+iteration 0, client 92, acc: 0.3963 
+iteration 0, client 77, acc: 0.4955 
+iteration 0, client 2, acc: 0.3375 
+iteration 0, client 51, acc: 0.5537 
+iteration 0, client 73, acc: 0.5501 
+iteration 0, client 10, acc: 0.4914 
+iteration 0, client 58, acc: 0.2563 
+iteration 0, client 74, acc: 0.4008 
+iteration 0, client 46, acc: 0.5532 
+iteration 0, client 35, acc: 0.5016 
+iteration 0, client 97, acc: 0.5071 
+iteration 0, client 72, acc: 0.4636 
+iteration 0, client 63, acc: 0.3691 
+iteration 0, client 14, acc: 0.4919 
+iteration 0, client 87, acc: 0.5852 
+iteration 0, client 33, acc: 0.5214 
+iteration 0, client 70, acc: 0.6174 
+iteration 0, client 68, acc: 0.5478 
+iteration 0, client 0, acc: 0.5366 
+iteration 0, client 76, acc: 0.5933 
+iteration 0, client 38, acc: 0.3548 
+iteration 0, client 65, acc: 0.4816 
+iteration 0, client 82, acc: 0.5796 
+iteration 0, client 11, acc: 0.6243 
+iteration 0, client 79, acc: 0.5920 
+iteration 0, client 27, acc: 0.3950 
+iteration 0, client 95, acc: 0.3446 
+iteration 0, client 26, acc: 0.4213 
+iteration 0, client 54, acc: 0.5337 
+iteration 0, client 93, acc: 0.4196 
+iteration 0, client 57, acc: 0.5325 
+iteration 0, client 24, acc: 0.6216 
+iteration 0, client 34, acc: 0.6190 
+iteration 0, client 91, acc: 0.5945 
+iteration 0, client 52, acc: 0.5261 
+iteration 0, client 20, acc: 0.6169 
+iteration 0, client 42, acc: 0.5067 
+iteration 0, client 81, acc: 0.6378 
+fine tuning stage round 0, test acc  0.6938 
+fine tuning stage round 1, test acc  0.7175 
+fine tuning stage round 2, test acc  0.7235 
+fine tuning stage round 3, test acc  0.7318 
+fine tuning stage round 4, test acc  0.7278 
+fine tuning stage round 5, test acc  0.7375 
+fine tuning stage round 6, test acc  0.7405 
+fine tuning stage round 7, test acc  0.7513 
+fine tuning stage round 8, test acc  0.7550 
+fine tuning stage round 9, test acc  0.7586 
+fine tuning stage round 10, test acc  0.7597 
+fine tuning stage round 11, test acc  0.7689 
+fine tuning stage round 12, test acc  0.7681 
+fine tuning stage round 13, test acc  0.7677 
+fine tuning stage round 14, test acc  0.7729 
+fine tuning stage round 15, test acc  0.7797 
+fine tuning stage round 16, test acc  0.7844 
+fine tuning stage round 17, test acc  0.7831 
+fine tuning stage round 18, test acc  0.7831 
+fine tuning stage round 19, test acc  0.7892 
+fine tuning stage round 20, test acc  0.7919 
+fine tuning stage round 21, test acc  0.7981 
+fine tuning stage round 22, test acc  0.7969 
+fine tuning stage round 23, test acc  0.8057 
+fine tuning stage round 24, test acc  0.8016 
+fine tuning stage round 25, test acc  0.8078 
+fine tuning stage round 26, test acc  0.8075 
+fine tuning stage round 27, test acc  0.8138 
+fine tuning stage round 28, test acc  0.8133 
+fine tuning stage round 29, test acc  0.8121 
+fine tuning stage round 30, test acc  0.8188 
+fine tuning stage round 31, test acc  0.8165 
+fine tuning stage round 32, test acc  0.8197 
+fine tuning stage round 33, test acc  0.8229 
+fine tuning stage round 34, test acc  0.8275 
+fine tuning stage round 35, test acc  0.8245 
+fine tuning stage round 36, test acc  0.8241 
+fine tuning stage round 37, test acc  0.8315 
+fine tuning stage round 38, test acc  0.8263 
+fine tuning stage round 39, test acc  0.8311 
+fine tuning stage round 40, test acc  0.8336 
+fine tuning stage round 41, test acc  0.8397 
+fine tuning stage round 42, test acc  0.8394 
+fine tuning stage round 43, test acc  0.8372 
+fine tuning stage round 44, test acc  0.8385 
+fine tuning stage round 45, test acc  0.8425 
+fine tuning stage round 46, test acc  0.8404 
+fine tuning stage round 47, test acc  0.8437 
+fine tuning stage round 48, test acc  0.8431 
+fine tuning stage round 49, test acc  0.8453 
+fine tuning stage round 50, test acc  0.8489 
+fine tuning stage round 51, test acc  0.8472 
+fine tuning stage round 52, test acc  0.8492 
+fine tuning stage round 53, test acc  0.8526 
+fine tuning stage round 54, test acc  0.8483 
+fine tuning stage round 55, test acc  0.8518 
+fine tuning stage round 56, test acc  0.8517 
+fine tuning stage round 57, test acc  0.8533 
+fine tuning stage round 58, test acc  0.8501 
+fine tuning stage round 59, test acc  0.8527 
+fine tuning stage round 60, test acc  0.8526 
+fine tuning stage round 61, test acc  0.8485 
+fine tuning stage round 62, test acc  0.8501 
+fine tuning stage round 63, test acc  0.8541 
+fine tuning stage round 64, test acc  0.8544 
+fine tuning stage round 65, test acc  0.8564 
+fine tuning stage round 66, test acc  0.8568 
+fine tuning stage round 67, test acc  0.8578 
+fine tuning stage round 68, test acc  0.8577 
+fine tuning stage round 69, test acc  0.8581 
+fine tuning stage round 70, test acc  0.8550 
+fine tuning stage round 71, test acc  0.8633 
+fine tuning stage round 72, test acc  0.8642 
+fine tuning stage round 73, test acc  0.8635 
+fine tuning stage round 74, test acc  0.8649 
+fine tuning stage round 75, test acc  0.8665 
+fine tuning stage round 76, test acc  0.8641 
+fine tuning stage round 77, test acc  0.8679 
+fine tuning stage round 78, test acc  0.8686 
+fine tuning stage round 79, test acc  0.8674 
+fine tuning stage round 80, test acc  0.8703 
+fine tuning stage round 81, test acc  0.8684 
+fine tuning stage round 82, test acc  0.8693 
+fine tuning stage round 83, test acc  0.8694 
+fine tuning stage round 84, test acc  0.8718 
+fine tuning stage round 85, test acc  0.8698 
+fine tuning stage round 86, test acc  0.8654 
+fine tuning stage round 87, test acc  0.8710 
+fine tuning stage round 88, test acc  0.8705 
+fine tuning stage round 89, test acc  0.8709 
+fine tuning stage round 90, test acc  0.8719 
+fine tuning stage round 91, test acc  0.8744 
+fine tuning stage round 92, test acc  0.8734 
+fine tuning stage round 93, test acc  0.8754 
+fine tuning stage round 94, test acc  0.8760 
+fine tuning stage round 95, test acc  0.8756 
+fine tuning stage round 96, test acc  0.8756 
+fine tuning stage round 97, test acc  0.8747 
+fine tuning stage round 98, test acc  0.8773 
+fine tuning stage round 99, test acc  0.8747 
+third stage round 0, test acc  0.8755 
+third stage round 1, test acc  0.8794 
+third stage round 2, test acc  0.8696 
+third stage round 3, test acc  0.8697 
+third stage round 4, test acc  0.8747 
+third stage round 5, test acc  0.8766 
+third stage round 6, test acc  0.8702 
+third stage round 7, test acc  0.8764 
+third stage round 8, test acc  0.8798 
+third stage round 9, test acc  0.8763 
+third stage round 10, test acc  0.8755 
+third stage round 11, test acc  0.8799 
+third stage round 12, test acc  0.8774 
+third stage round 13, test acc  0.8697 
+third stage round 14, test acc  0.8790 
+third stage round 15, test acc  0.8751 
+third stage round 16, test acc  0.8765 
+third stage round 17, test acc  0.8798 
+third stage round 18, test acc  0.8789 
+third stage round 19, test acc  0.8757 
+third stage round 20, test acc  0.8776 
